@@ -1,0 +1,58 @@
+apply plugin: 'com.android.library'
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'test-maven'
+
+    publishedGroupId = 'com.'
+    libraryName = 'FBLike'
+    artifact = 'test-maven'
+
+    libraryDescription = 'Testing publishing library in maven'
+
+    siteUrl = 'https://github.com/andretbm/test-maven'
+    gitUrl = 'https://github.com/andretbm/test-maven.git'
+
+    libraryVersion = '0.0.1'
+
+    developerId = 'andretbm'
+    developerName = 'Andre Teixeira'
+    developerEmail = 'andremuchagata@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    //compile 'com.android.support:appcompat-v7:22.0.0'
+    //compile 'com.google.android.gms:play-services:6.5.87'
+    //compile 'com.squareup.retrofit:retrofit:1.9.0'
+    //compile 'com.google.code.gson:gson:2.2.4'
+    // Added to correct problems with dex
+    // androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.2.1'
+    compile files('libs/UnityAndroidPlaybackEngine.jar')
+    compile files('libs/play-services-6.5.87/classes.jar')
+    compile files('libs/appcompat-v7-22.0.0/classes.jar')
+    compile files('libs/com.squareup.retrofit/retrofit/jars/retrofit-1.9.0.jar')
+    compile files('libs/com.google.code.gson/gson/jars/gson-2.3.1.jar')
+}
