@@ -1,28 +1,60 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven'
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty('bintray.user')
+    key = properties.getProperty('bintray.apikey')
+
+    configurations = ['published', 'archives']
+
+    dryRun = false
+    publish = true
+
+    pkg {
+        repo = 'test-maven'
+        name = 'test-maven'
+
+        desc = 'This repository contains a library that aims to provide a custom searchable interface for android applications'
+
+        websiteUrl = 'https://github.com/andretbm/test-maven'
+        issueTrackerUrl = 'https://github.com/andretbm/test-maven'
+        vcsUrl = 'https://github.com/andretbm/test-maven.git'
+
+        licenses = ['The Apache Software License, Version 2.0']
+        labels = ['android', 'searchable', 'interface', 'layout']
+        publicDownloadNumbers = true
+    }
+}
 
 ext {
-    bintrayRepo = 'maven'
+    bintrayRepo = 'test-maven'
     bintrayName = 'test-maven'
 
-    publishedGroupId = 'com.'
-    libraryName = 'FBLike'
+    publishedGroupId = 'com.github.andretbm'
+    libraryName = 'test-maven'
     artifact = 'test-maven'
 
-    libraryDescription = 'Testing publishing library in maven'
+    libraryDescription = 'A wrapper for Maven Native Like Button (LikeView) on Android'
 
     siteUrl = 'https://github.com/andretbm/test-maven'
     gitUrl = 'https://github.com/andretbm/test-maven.git'
 
-    libraryVersion = '0.0.1'
+    libraryVersion = '1.0'
 
     developerId = 'andretbm'
-    developerName = 'Andre Teixeira'
+    developerName = 'André Teixeira'
     developerEmail = 'andremuchagata@gmail.com'
 
     licenseName = 'The Apache Software License, Version 2.0'
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
     allLicenses = ["Apache-2.0"]
 }
+
 
 android {
     compileSdkVersion 21
@@ -56,3 +88,7 @@ dependencies {
     compile files('libs/com.squareup.retrofit/retrofit/jars/retrofit-1.9.0.jar')
     compile files('libs/com.google.code.gson/gson/jars/gson-2.3.1.jar')
 }
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+
