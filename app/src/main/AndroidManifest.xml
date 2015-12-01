@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.ignidata.api.demo">
+    package="com.example.andremuchagata.testignidataapi">
 
     <uses-sdk tools:overrideLibrary="com.ignidata.api.plugin"/>
     <application
@@ -11,8 +11,8 @@
         android:label="Demo"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.ignidata.api.demo.DemoActivity"
-            android:label="IgnidataDemoApp" >
+            android:name="com.example.andremuchagata.testignidataapi.DemoActivity"
+            android:label="DemoActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,5 +20,6 @@
             </intent-filter>
         </activity>
     </application>
+
 
 </manifest>

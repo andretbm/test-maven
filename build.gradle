@@ -6,20 +6,29 @@ buildscript {
         maven {
             url 'https://download.01.org/crosswalk/releases/crosswalk/android/maven2'
         }
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.2.3'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
         classpath 'com.github.dcendents:android-maven-plugin:1.2'
+        classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.7.0'
+        //classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
     }
 }
-
 allprojects {
-    apply plugin: 'com.jfrog.bintray'
     repositories {
+        apply plugin: 'license'
         jcenter()
         maven {
             url 'https://download.01.org/crosswalk/releases/crosswalk/android/maven2'
         }
     }
+    license {
+        header rootProject.file('LICENSE')
+        strictCheck true
+    }
+    configurations { all*.exclude group: 'com.android.support', module: 'support-v4' }
 }

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="1_classes">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/play-services-6.5.87/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

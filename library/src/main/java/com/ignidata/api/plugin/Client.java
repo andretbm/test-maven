@@ -7,7 +7,7 @@ import java.util.List;
 public class Client implements Serializable {
 	Object id;
 	String userId;
-    String userAgent; // new requirement for first-time users correct id
+	String userAgent; // new requirement for first-time users correct id
 	List<Partner> partner;
 	String gender;
 	String country;

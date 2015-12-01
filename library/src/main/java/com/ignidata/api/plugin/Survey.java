@@ -7,13 +7,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * @author IGNIDATA Lda.
- * @version 1.1
- * @see 
- *
- * // Store data of survey
- */
 public class Survey {
 
     public Survey() {

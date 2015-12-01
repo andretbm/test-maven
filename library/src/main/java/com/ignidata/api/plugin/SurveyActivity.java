@@ -144,7 +144,7 @@ public class SurveyActivity extends Activity {
             SurveyActivity.this.myCalendar.set(1, year);
             SurveyActivity.this.myCalendar.set(2, monthOfYear);
             SurveyActivity.this.myCalendar.set(5, dayOfMonth);
-           //SurveyActivity.this.birthdate = SurveyActivity.this.getAge(year, monthOfYear, dayOfMonth);
+            //SurveyActivity.this.birthdate = SurveyActivity.this.getAge(year, monthOfYear, dayOfMonth);
             SurveyActivity.this.updateLabel();
         }
     }
@@ -284,7 +284,7 @@ public class SurveyActivity extends Activity {
         }
 
         protected Void doInBackground(Void... voids) {
-           // ((IgnidataSurveyApiInterface) new Builder().setEndpoint((String) Globals.endpoints.get("clients")).build().create(IgnidataSurveyApiInterface.class)).getClient(new Client(), new C14171());
+            // ((IgnidataSurveyApiInterface) new Builder().setEndpoint((String) Globals.endpoints.get("clients")).build().create(IgnidataSurveyApiInterface.class)).getClient(new Client(), new C14171());
             return null;
         }
     }
@@ -363,11 +363,11 @@ public class SurveyActivity extends Activity {
                     {
 
 
-                    Utils.showToast(SurveyActivity.this, " We're so sorry!Our services are down Please try again later");
-                }else{
-                    Utils.showToast(SurveyActivity.this, "You need a working connection to get our goodies! Double-check your Wi-Fi or mobile data connection!");
+                        Utils.showToast(SurveyActivity.this, " We're so sorry!Our services are down Please try again later");
+                    }else{
+                        Utils.showToast(SurveyActivity.this, "You need a working connection to get our goodies! Double-check your Wi-Fi or mobile data connection!");
+                    }
                 }
-             }
 
                 SurveyActivity.this.setResult(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
                 if (SurveyActivity.this.getIntent().hasExtra("platform") && SurveyActivity.this.getIntent().getExtras().get("platform").toString().equals(String.valueOf(Globals.USING_UNITY3D))) {
@@ -481,7 +481,7 @@ public class SurveyActivity extends Activity {
 
                     org.jsoup.nodes.Document doc = Jsoup.parse(aux);
 
-                   
+
 
                     XWalkPreferences.setValue("enable-javascript", true);
 
@@ -543,7 +543,7 @@ public class SurveyActivity extends Activity {
 
         protected Void doInBackground(Void... voids) {
 
-           if(hasID == false)
+            if(hasID == false)
             {
 
 
@@ -578,7 +578,7 @@ public class SurveyActivity extends Activity {
 
         public void onLoadFinished(XWalkView view, String url) {
             super.onLoadFinished(view, url);
-          hideProgressDialog();
+            hideProgressDialog();
         }
 
         public void onProgressChanged(XWalkView view, int progressInPercent) {
@@ -640,8 +640,8 @@ public class SurveyActivity extends Activity {
         }
 
         protected Void doInBackground(Void... voids) {
-           //
-           // ((IgnidataSurveyApiInterface) new Builder().setEndpoint("http://surveys.ignidata.com/getMobileSurvey").build().create(IgnidataSurveyApiInterface.class))77.postClient(SurveyActivity.this.client, new C14211());
+            //
+            // ((IgnidataSurveyApiInterface) new Builder().setEndpoint("http://surveys.ignidata.com/getMobileSurvey").build().create(IgnidataSurveyApiInterface.class))77.postClient(SurveyActivity.this.client, new C14211());
             return null;
         }
     }
@@ -738,21 +738,21 @@ public class SurveyActivity extends Activity {
 
 
 
-       /* private Context context;
-        private XWalkView xWalkWebView;
+        /* private Context context;
+         private XWalkView xWalkWebView;
 
-        public WebAppInterface(Context c, XWalkView xWalkWebView) {
-            context = c;
-            this.xWalkWebView = xWalkWebView;
-        }*/
-       @org.xwalk.core.JavascriptInterface
+         public WebAppInterface(Context c, XWalkView xWalkWebView) {
+             context = c;
+             this.xWalkWebView = xWalkWebView;
+         }*/
+        @org.xwalk.core.JavascriptInterface
         public void leave(String toast) {
 
-           webviewLowerAndroid = null;
+            webviewLowerAndroid = null;
 
 
-           layout.removeAllViews();
-           finish();
+            layout.removeAllViews();
+            finish();
 
 
 
@@ -765,7 +765,7 @@ public class SurveyActivity extends Activity {
             if (result.equals("success")) {
 
                 Utils.showToast(SurveyActivity.this, "Your survey has been submitted.");
-                 SurveyActivity.this.setResult(100);
+                SurveyActivity.this.setResult(100);
                 if (SurveyActivity.this.getIntent().hasExtra("platform") && SurveyActivity.this.getIntent().getExtras().get("platform").toString().equals(String.valueOf(Globals.USING_UNITY3D))) {
                     SurveyActivity.sendResultToUnityPlayer(SurveyActivity.this.getIntent().getExtras().getString("unityAnchorObject"), 100);
                 }
@@ -795,7 +795,7 @@ public class SurveyActivity extends Activity {
             webviewLowerAndroid = null;
 
 
-           finish();
+            finish();
             layout.removeAllViews();
 
 
@@ -894,7 +894,7 @@ public class SurveyActivity extends Activity {
                 new PutSurveyAsyncTask().execute();
             }
         }*/
-        //@JavascriptInterface
+    //@JavascriptInterface
        /* public void submitPartialResults(String questionIndex, String questionType, String answers) {
             elapsedTime(Integer.parseInt(questionIndex));
             List<Answer> listAnswers = ((Question) SurveyActivity.this.partialSurvey.questions.get(Integer.parseInt(questionIndex))).getAnswers();
@@ -989,7 +989,7 @@ public class SurveyActivity extends Activity {
 
 
 
-       // }
+        // }
 
         webviewLowerAndroid = new XWalkView(SurveyActivity.this.getApplicationContext(), this);
 
@@ -1000,14 +1000,14 @@ public class SurveyActivity extends Activity {
                 LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         this.layout.setOrientation(LinearLayout.VERTICAL);
 
-      //  XWalkSettings webSettings = webviewLowerAndroid.getSettings();
-       // webSettings.setJavaScriptEnabled(true);
+        //  XWalkSettings webSettings = webviewLowerAndroid.getSettings();
+        // webSettings.setJavaScriptEnabled(true);
 
         webviewLowerAndroid.setResourceClient(new ResourceClient(webviewLowerAndroid));
 
 
         SharedPreferences settings = getSharedPreferences("app.prefs", Context.MODE_PRIVATE);
-         id_participant = settings.getString("USERID","");
+        id_participant = settings.getString("USERID","");
 
 
         if(id_participant.length()==0)
@@ -1064,7 +1064,7 @@ public class SurveyActivity extends Activity {
         return BuildConfig.FLAVOR;
     }
 
-        public void showSignup() {
+    public void showSignup() {
 
 
         this.editBirthDate = new EditText(this);
@@ -1089,7 +1089,7 @@ public class SurveyActivity extends Activity {
         this.editLanguage.setOnTouchListener(new C07554());
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-       // layoutParams = 1;
+        // layoutParams = 1;
 
         LinearLayout.LayoutParams titleLabel = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);

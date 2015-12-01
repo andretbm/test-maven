@@ -1,58 +1,52 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven'
+apply plugin: 'signing'
 
-ext {
-    bintrayRepo = 'test-maven'
-    bintrayName = 'test-maven'
+version = "1.0.6"
 
-    publishedGroupId = 'com.github.andretbm'
-    libraryName = 'test-maven'
-    artifact = 'test-maven'
 
-    libraryDescription = 'A library for others application to present our surveys'
-
-    siteUrl = 'https://github.com/andretbm/test-maven'
-    gitUrl = 'https://github.com/andretbm/test-maven.git'
-
-    libraryVersion = '1.0.5'
-
-    developerId = 'andretbm'
-    developerName = 'Andre Teixeira'
-    developerEmail = 'andremuchagata@gmail.com'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
-}
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
 
     defaultConfig {
         minSdkVersion 15
+
         targetSdkVersion 21
         versionCode 1
-        versionName "1.0"
-        renderscriptTargetApi 18
-        renderscriptSupportModeEnabled true
+        versionName "1.0.0.4"
     }
     buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
     }
+}
+
+def siteUrl = 'https://github.com/andretbm/test-maven'      // Homepage URL of the library
+def gitUrl = 'https://github.com/andretbm/test-maven.git'   // Git repository URL
+group = "com.ignidata.api.plugin"                                        // Maven Group ID for the artifact
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    //compile 'com.android.support:appcompat-v7:22.0.0'
-    //compile 'com.google.android.gms:play-services:6.5.87'
-    //compile 'com.squareup.retrofit:retrofit:1.9.0'
-    //compile 'com.google.code.gson:gson:2.2.4'
-    // Added to correct problems with dex
-    // androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.2.1'
     compile files('libs/UnityAndroidPlaybackEngine.jar')
     compile files('libs/play-services-6.5.87/classes.jar')
     compile files('libs/appcompat-v7-22.0.0/classes.jar')
@@ -64,6 +58,20 @@ dependencies {
 
 
 }
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
-//apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-//apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    configurations = ['archives']
+    pkg {
+        repo = "ignidata-sdk"
+        name = "ignidat-api-plugin"
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
+}
