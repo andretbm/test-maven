@@ -1,0 +1,7 @@
+{
+  "name": "PolymerWebView",
+  "dependencies": {
+    "core-elements": "Polymer/core-elements#^0.5.6",
+    "paper-elements": "Polymer/paper-elements#^0.5.6"
+  }
+}

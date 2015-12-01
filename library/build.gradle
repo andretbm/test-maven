@@ -1,35 +1,6 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven'
-
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
-bintray {
-    user = properties.getProperty('bintray.user')
-    key = properties.getProperty('bintray.apikey')
-
-    configurations = ['published', 'archives']
-
-    dryRun = false
-    publish = true
-
-    pkg {
-        repo = 'test-maven'
-        name = 'test-maven'
-
-        desc = 'This repository contains a library that aims to provide a custom searchable interface for android applications'
-
-        websiteUrl = 'https://github.com/andretbm/test-maven'
-        issueTrackerUrl = 'https://github.com/andretbm/test-maven'
-        vcsUrl = 'https://github.com/andretbm/test-maven.git'
-
-        licenses = ['The Apache Software License, Version 2.0']
-        labels = ['android', 'searchable', 'interface', 'layout']
-        publicDownloadNumbers = true
-    }
-}
 
 ext {
     bintrayRepo = 'test-maven'
@@ -39,12 +10,12 @@ ext {
     libraryName = 'test-maven'
     artifact = 'test-maven'
 
-    libraryDescription = 'A wrapper for Maven Native Like Button (LikeView) on Android'
+    libraryDescription = 'A library for others application to present our surveys'
 
     siteUrl = 'https://github.com/andretbm/test-maven'
     gitUrl = 'https://github.com/andretbm/test-maven.git'
 
-    libraryVersion = '1.0.22'
+    libraryVersion = '1.0.5'
 
     developerId = 'andretbm'
     developerName = 'Andre Teixeira'
@@ -54,8 +25,6 @@ ext {
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
     allLicenses = ["Apache-2.0"]
 }
-
-
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
@@ -65,6 +34,8 @@ android {
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
+        renderscriptTargetApi 18
+        renderscriptSupportModeEnabled true
     }
     buildTypes {
         release {
@@ -87,8 +58,12 @@ dependencies {
     compile files('libs/appcompat-v7-22.0.0/classes.jar')
     compile files('libs/com.squareup.retrofit/retrofit/jars/retrofit-1.9.0.jar')
     compile files('libs/com.google.code.gson/gson/jars/gson-2.3.1.jar')
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile 'org.xwalk:xwalk_core_library:15.44.384.12'
+    compile 'org.jsoup:jsoup:1.7.1'
+
+
 }
 
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
-
+//apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+//apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'

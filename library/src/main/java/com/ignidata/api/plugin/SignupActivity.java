@@ -16,11 +16,14 @@ import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.Date;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -44,12 +47,14 @@ public class SignupActivity extends Activity {
         //myWebView = (WebView) findViewById(R.id.webview);
 
         LinearLayout layout = new LinearLayout(this);
-        layout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+        layout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         layout.setOrientation(LinearLayout.VERTICAL);
 
         myWebView = new WebView(this);
-        myWebView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+
+        myWebView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         layout.addView(myWebView);
+
         setContentView(layout);
 
         // clean cache
@@ -67,7 +72,9 @@ public class SignupActivity extends Activity {
 
 
         myWebView.setWebViewClient(new WebViewClient());
+
         myWebView.getSettings().setJavaScriptEnabled(true);
+
         myWebView.addJavascriptInterface(new SignupJSInterface(this), "Android");
 
         // to get jQuery mobile working from Jelly Bean onwards
@@ -79,8 +86,9 @@ public class SignupActivity extends Activity {
         myWebView.getSettings().setDatabaseEnabled(true);
         myWebView.getSettings().setDomStorageEnabled(true);
 
+
         //myWebView.loadUrl("file::///android_asset/signup.html");
-        myWebView.loadUrl("http://10.0.2.2:5000/static/signup.html");
+       // myWebView.loadUrl("http://10.0.2.2:5000/static/signup.html");
     }
 
 
@@ -93,41 +101,7 @@ public class SignupActivity extends Activity {
     // and user agent shall be sent to the backend - the latter is to answer back, returning a
     // client object with the same data sent before along with a computed user hash code - which will
     // be stored at the plugin's directory in the device storage.
-    private class PostClientAsyncTask extends AsyncTask<Void, Void, Void> {
 
-        @Override
-        protected Void doInBackground(Void... voids) {
-            IgnidataSurveyApi.IgnidataSurveyApiInterface retrofitInterface = new RestAdapter.Builder()
-                    .setLogLevel(RestAdapter.LogLevel.FULL)
-                    //.setEndpoint(IgnidataSurveyApi.IGNIDATA_BASE_URL).build()
-                    .setEndpoint(Globals.endpoints.get("clients")).build()
-                    .create(IgnidataSurveyApi.IgnidataSurveyApiInterface.class);
-
-            retrofitInterface.postClient(client, new Callback<Client>() {
-                @Override
-                public void failure(RetrofitError retrofitError) {
-                    System.out.println(retrofitError.getLocalizedMessage() + " -> "
-                            + retrofitError.getKind().ordinal());
-                }
-
-                @Override
-                public void success(Client arg0, Response response) {
-                    Log.d("POST_CLIENT_RESPONSE: ", arg0.toString());
-                    client = arg0;
-                    Log.d("POST_CLIENT_USER_ID: ", arg0.userId);
-                    try {
-                        saveUserId(arg0.userId);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-
-            return null;
-
-        }
-
-    }
 
 
     public void saveUserId(String userId) throws FileNotFoundException {
@@ -223,13 +197,21 @@ public class SignupActivity extends Activity {
         }
 
         @JavascriptInterface
-        public void getUserSignup(int age, String gender, String country) {
-            client = new Client();
+        public void getUserSignup(String age, String gender, String language, String profession,String city, String country, String postalCode) {
+           String userID = "";
+            client = new Client(age, gender, profession, city, country, postalCode, language,userID);
             client.age = age;
             client.gender = gender;
+            client.language = language;
+            client.profession = profession;
             client.country = country;
-            client.userAgent = SignupActivity.getUserAgent();
-            new PostClientAsyncTask().execute();
+            client.postalCode = postalCode;
+            client.country = country;
+            client.city = city;
+
+
+            //client.userAgent = SignupActivity.getUserAgent();
+            //new PostClientAsyncTask().execute();
         }
 
 
